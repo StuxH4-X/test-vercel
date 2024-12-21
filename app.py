@@ -36,11 +36,17 @@ selected_courses = []  # Global variable to store selected courses
 def save_selected_courses():
     global selected_courses
     try:
-        # Parse the JSON data from the request
-        selected_courses = json.loads(request.data)
+        # Log request data
+        print("Request Data:", request.data)
+        print("Request JSON:", request.get_json())
+
+        selected_courses = request.get_json()
+        if not selected_courses:
+            return "No data received", 400
         return "Success", 200
     except Exception as e:
-        return f"Error saving courses: {e}", 500
+        print(f"Error: {e}")
+        return f"Error saving courses: {str(e)}", 500
 
 @app.route("/timetable", methods=["GET"])
 def timetable_page():
