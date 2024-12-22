@@ -225,16 +225,31 @@ document.getElementById("exportButton").addEventListener("click", () => {
         });
 });
 
+const backButton = document.getElementById("backButton");
 
-// Proceed button click
+// Handle the "Back" button click
+backButton.addEventListener("click", () => {
+    document.getElementById("searchSection").style.display = "block"; // Show search bar
+    document.getElementById("proceedButton").style.display = "block"; // Show proceed button
+    document.getElementById("summarySection").style.display = "none"; // Hide summary section
+    document.getElementById("exportButton").style.display = "none"; // Hide export button
+    backButton.style.display = "none"; // Hide back button
+
+    renderTable(); // Render the normal table view
+});
+
+// Modify the proceed button click handler to show the "Back" button
 proceedButton.addEventListener("click", () => {
     document.getElementById("searchSection").style.display = "none"; // Hide search bar
     document.getElementById("proceedButton").style.display = "none"; // Hide proceed button
-    document.getElementById("summarySection").style.display = "block";
-    document.getElementById("exportButton").style.display = "block";
+    document.getElementById("summarySection").style.display = "block"; // Show summary section
+    document.getElementById("exportButton").style.display = "block"; // Show export button
+    backButton.style.display = "block"; // Show back button
 
     renderTable(true); // Render summary view
 });
+
+
 
 renderTable();
 
